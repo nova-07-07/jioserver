@@ -2,10 +2,13 @@ FROM ubuntu:22.04
 
 WORKDIR /app
 
-COPY . .
+RUN apt update && apt install -y wget
 
-RUN chmod +x jiotv_go-linux-amd64 start.sh
+RUN wget https://github.com/JioTV-Go/jiotv_go/releases/latest/download/jiotv_go-linux-amd64
 
-ENV PORT=8080
+RUN chmod +x jiotv_go-linux-amd64
+
+COPY start.sh .
+RUN chmod +x start.sh
 
 CMD ["./start.sh"]
