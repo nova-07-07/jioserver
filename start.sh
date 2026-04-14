@@ -1,7 +1,11 @@
 #!/bin/bash
 
-echo "Starting JioTV Server..."
+echo "Starting JioTV Go..."
 
-chmod +x jiotv_go-linux-amd64
-
-./jiotv_go-linux-amd64
+# Prevent crash loop
+while true
+do
+  ./jiotv_go serve --skip-update-check
+  echo "Server crashed. Restarting in 5 seconds..."
+  sleep 5
+done
